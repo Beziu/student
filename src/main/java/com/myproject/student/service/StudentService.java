@@ -44,6 +44,8 @@ public class StudentService {
      * Otwierała nam transakcję przed wywołaniem metody oznaczonej
      * tą adnotacją i zamykała transakcje po zakończeniu działania metody.
      *
+     * Zmienne z klasy Student traktuje jako dane w bazie danych i zmienia je od razu.
+     *
      * https://pater.dev/co-tak-na-prawde-robi-transactional/
      *
      * @param studentId
