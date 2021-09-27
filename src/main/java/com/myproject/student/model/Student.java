@@ -4,27 +4,29 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
 
-@Entity
-@Table
-public class Student {
-
-    @Id
-    @SequenceGenerator(
+@Entity                                             // @Entity jest informacja dla JPA
+@Table(name = "student")                            // @Table musi byc użyty, aby zmienne zostały
+public class Student {                              // powiązane z nazwami kolumn w tabeli.
+                                                    // Dodanie nazwy tabeli nie jest obowiązkowe
+    @Column(nullable = false)
+    @Id                                             // @Id Tworzy primary key
+    @SequenceGenerator(                             // Generator dla ID, określa rozmiar ID
             name = "student_sequence",
             sequenceName = "student_sequence",
             allocationSize = 1
     )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "student_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
     private Long id;
-    private String name;
+
+    @Column(name = "name", nullable = false)        // Można zapisać @Column oraz nazwy
+    private String name;                            // kolumn lub uczyć @SequenceGenerator
+
+    @Column(name = "email", nullable = false)
     private String email;
     private LocalDate dob;
 
-    @Transient
-    private Integer age;
+    @Transient                                      // Tworzy wirtualną kolumnę, obliczana ona jest
+    private Integer age;                            // z bieżącej daty, niezapisywana w tabeli.
 
     public Student() {
     }
